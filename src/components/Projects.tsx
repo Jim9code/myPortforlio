@@ -351,14 +351,23 @@ const Projects: React.FC = () => {
                             {project.liveUrl ? project.liveUrl.replace('https://', '').replace(/\/$/, '') : project.title.toLowerCase()}
                           </span>
                         </div>
-                        {/* Screenshot image container */}
+                        {/* Screenshot image container with WebP support */}
                         <div className="relative aspect-[16/10] overflow-hidden bg-gray-900">
-                          <img
-                            src={project.image}
-                            alt={`${project.title} Preview`}
-                            className="w-full h-full object-cover object-top group-hover/preview:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
+                          <picture>
+                            <source
+                              srcSet={project.image.replace(/\.(png|jpe?g)$/i, '.webp')}
+                              type="image/webp"
+                            />
+                            <img
+                              src={project.image}
+                              alt={`${project.title} Preview`}
+                              className="w-full h-full object-cover object-top group-hover/preview:scale-105 transition-transform duration-500"
+                              loading="lazy"
+                              decoding="async"
+                              width={800}
+                              height={500}
+                            />
+                          </picture>
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}

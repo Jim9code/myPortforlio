@@ -159,11 +159,18 @@ const Contact: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl shadow-sm border border-stone-200/90">
                 {/* Logo at top of form */}
                 <div className="flex justify-center mb-6">
-                  <img 
-                    src="/logo.jpeg" 
-                    alt="Jethro Daspan Logo" 
-                    className="h-12 w-12 object-contain"
-                  />
+                  <picture>
+                    <source srcSet="/logo.webp" type="image/webp" />
+                    <img 
+                      src="/logo.jpeg" 
+                      alt="Jethro Daspan Logo" 
+                      className="h-12 w-12 object-contain"
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 
                 <h3 className="text-xl font-medium mb-6 text-center text-stone-900">Send a Message</h3>

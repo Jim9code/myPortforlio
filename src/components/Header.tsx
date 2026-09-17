@@ -51,11 +51,18 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             className="cursor-pointer flex items-center"
             onClick={() => scrollToSection('home')}
           >
-            <img 
-              src="/logo.jpeg" 
-              alt="Jethro Daspan Logo" 
-              className="h-10 w-10 object-contain"
-            />
+            <picture>
+              <source srcSet="/logo.webp" type="image/webp" />
+              <img 
+                src="/logo.jpeg" 
+                alt="Jethro Daspan Logo" 
+                className="h-10 w-10 object-contain"
+                width={40}
+                height={40}
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
           </motion.div>
 
           {/* Desktop Navigation */}
