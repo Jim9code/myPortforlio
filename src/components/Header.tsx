@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+        isScrolled ? 'bg-[#FAF7F2]/90 backdrop-blur-md shadow-sm border-b border-stone-200/80' : 'bg-transparent'
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-4">

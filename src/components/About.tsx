@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Brain, Coffee, Lightbulb, Rocket } from 'lucide-react';
+import { Code, Database, Blocks, Coffee, Lightbulb, Rocket } from 'lucide-react';
 
 const About: React.FC = () => {
   const containerVariants = {
@@ -26,7 +26,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 px-6 relative overflow-hidden">
+    <section id="about" className="py-20 px-6 relative overflow-hidden bg-[#F5EFEB]/70">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 font-mono text-sm">
@@ -77,21 +77,21 @@ const About: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed">
-                I'm a passionate fullstack developer with a deep focus on backend systems and AI engineering. 
-                My journey into tech began with curiosity about how complex systems work behind the scenes, 
-                and that curiosity has driven me to specialize in building robust, scalable applications.
+                I'm a passionate fullstack developer with a deep focus on backend systems, 
+                high-performance web architecture, and Web3 technologies. 
+                My journey into tech began with curiosity about how complex distributed systems operate behind the scenes, 
+                and that curiosity has driven me to build robust, scalable applications.
               </p>
               
               <p className="text-lg text-gray-700 leading-relaxed">
-                I thrive on solving complex problems through clean, efficient code and love integrating 
-                cutting-edge AI technologies to create intelligent solutions. Whether it's designing 
-                RESTful APIs, optimizing database performance, or implementing machine learning workflows, 
-                I approach each challenge with precision and creativity.
+                I thrive on solving complex problems through clean, maintainable code. Whether it's designing 
+                high-throughput RESTful APIs, optimizing database queries, building production fullstack apps, 
+                or developing smart contracts on Ethereum/EVM, I approach each challenge with precision and creativity.
               </p>
 
               <p className="text-lg text-gray-700 leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
-                projects, or sharing knowledge with the developer community.
+                When I'm not coding, you'll find me exploring new Web3 protocols, contributing to open-source 
+                projects, or continuous learning in modern system design.
               </p>
 
               {/* Code Philosophy */}
@@ -122,7 +122,7 @@ const About: React.FC = () => {
                     <h3 className="text-xl font-medium">Frontend Development</h3>
                   </div>
                   <p className="text-gray-600">
-                    Creating intuitive user interfaces with React, Svelte, and modern JavaScript
+                    Creating intuitive, fast user interfaces with React, Svelte, and modern TypeScript
                   </p>
                 </motion.div>
 
@@ -137,22 +137,22 @@ const About: React.FC = () => {
                     <h3 className="text-xl font-medium">Backend Engineering</h3>
                   </div>
                   <p className="text-gray-600">
-                    Building scalable APIs and database architectures with Node.js and Express
+                    Building scalable APIs, microservices, and robust database architectures with Node.js and Laravel
                   </p>
                 </motion.div>
 
                 <motion.div
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-50 to-transparent"
+                  className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-amber-50 to-transparent"
                 >
                   <div className="flex items-center mb-4">
-                    <div className="p-2 bg-purple-100 rounded-lg mr-3">
-                      <Brain className="text-purple-600" size={24} />
+                    <div className="p-2 bg-amber-100 rounded-lg mr-3">
+                      <Blocks className="text-amber-600" size={24} />
                     </div>
-                    <h3 className="text-xl font-medium">AI Integration</h3>
+                    <h3 className="text-xl font-medium">Web3 & Smart Contracts</h3>
                   </div>
                   <p className="text-gray-600">
-                    Implementing intelligent features using OpenAI APIs and machine learning
+                    Developing decentralized applications, writing Solidity smart contracts, and EVM integration
                   </p>
                 </motion.div>
               </div>

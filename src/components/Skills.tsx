@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Brain, Server, Zap, Globe } from 'lucide-react';
+import { Code, Database, Server, Zap, Globe, Blocks } from 'lucide-react';
 
 const Skills: React.FC = () => {
   const skillCategories = [
@@ -13,20 +13,20 @@ const Skills: React.FC = () => {
     {
       title: 'Backend',
       icon: <Server className="w-6 h-6" />,
-      skills: ['Node.js', 'Express', 'REST APIs', 'GraphQL', 'Microservices', 'Authentication'],
+      skills: ['Node.js', 'Express', 'Laravel', 'PHP', 'REST APIs', 'GraphQL', 'Microservices', 'Authentication'],
       color: 'from-green-500 to-emerald-500'
+    },
+    {
+      title: 'Web3 & Blockchain',
+      icon: <Blocks className="w-6 h-6" />,
+      skills: ['Solidity', 'Smart Contracts', 'Ethers.js', 'Web3.js', 'Hardhat', 'Foundry', 'Ethereum / EVM', 'ERC-20 / ERC-721', 'IPFS'],
+      color: 'from-amber-500 to-orange-500'
     },
     {
       title: 'Database',
       icon: <Database className="w-6 h-6" />,
       skills: ['MySQL', 'MongoDB', 'PostgreSQL', 'Redis', 'Database Design', 'Query Optimization'],
       color: 'from-purple-500 to-violet-500'
-    },
-    {
-      title: 'AI/ML',
-      icon: <Brain className="w-6 h-6" />,
-      skills: ['OpenAI API', 'LangChain', 'Python', 'Machine Learning', 'Natural Language Processing'],
-      color: 'from-pink-500 to-rose-500'
     },
     {
       title: 'Tools & DevOps',
@@ -52,7 +52,7 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-20 px-6 bg-gray-50 relative overflow-hidden">
+    <section id="skills" className="py-20 px-6 bg-[#FAF7F2] relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10 text-6xl">{'{ }'}</div>
@@ -85,7 +85,7 @@ const Skills: React.FC = () => {
                 key={category.title}
                 variants={itemVariants}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white p-6 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 relative overflow-hidden group"
+                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/90 relative overflow-hidden group"
               >
                 {/* Gradient overlay on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
@@ -96,7 +96,7 @@ const Skills: React.FC = () => {
                       {category.icon}
                     </div>
                   </div>
-                  <h3 className="text-xl font-medium mb-4 text-center">{category.title}</h3>
+                  <h3 className="text-xl font-medium mb-4 text-center text-stone-900">{category.title}</h3>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {category.skills.map((skill, skillIndex) => (
                       <motion.span
@@ -105,7 +105,7 @@ const Skills: React.FC = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ delay: skillIndex * 0.1 }}
                         whileHover={{ scale: 1.05, y: -2 }}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-all duration-200 cursor-default font-medium"
+                        className="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-sm hover:bg-stone-200 transition-all duration-200 cursor-default font-medium border border-stone-200/60"
                       >
                         {skill}
                       </motion.span>

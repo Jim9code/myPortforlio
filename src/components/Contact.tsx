@@ -38,7 +38,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-6 bg-gray-50 relative overflow-hidden">
+    <section id="contact" className="py-20 px-6 bg-[#FAF7F2] relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 font-mono text-sm">
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div variants={itemVariants} className="space-y-8">
-              <h3 className="text-2xl font-medium mb-6 flex items-center">
+              <h3 className="text-2xl font-medium mb-6 flex items-center text-stone-900">
                 <MessageSquare className="w-6 h-6 mr-3 text-blue-600" />
                 Get in Touch
               </h3>
@@ -99,14 +99,14 @@ const Contact: React.FC = () => {
                 <motion.a
                   href="mailto:rinfwang4@gmail.com"
                   whileHover={{ x: 5, scale: 1.02 }}
-                  className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all duration-200 group"
+                  className="flex items-center p-4 bg-white border border-stone-200/90 rounded-xl hover:border-blue-400 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className="p-3 bg-blue-100 rounded-lg mr-4 group-hover:bg-blue-200 transition-colors duration-200">
+                  <div className="p-3 bg-blue-50 rounded-lg mr-4 group-hover:bg-blue-100 transition-colors duration-200">
                     <Mail className="text-blue-600" size={24} />
                   </div>
                   <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-gray-600">rinfwang4@gmail.com</p>
+                    <p className="font-medium text-stone-900">Email</p>
+                    <p className="text-stone-600">rinfwang4@gmail.com</p>
                   </div>
                 </motion.a>
 
@@ -115,14 +115,14 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 5, scale: 1.02 }}
-                  className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:border-gray-400 hover:shadow-md transition-all duration-200 group"
+                  className="flex items-center p-4 bg-white border border-stone-200/90 rounded-xl hover:border-stone-400 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className="p-3 bg-gray-100 rounded-lg mr-4 group-hover:bg-gray-200 transition-colors duration-200">
-                    <Github className="text-gray-600" size={24} />
+                  <div className="p-3 bg-stone-100 rounded-lg mr-4 group-hover:bg-stone-200 transition-colors duration-200">
+                    <Github className="text-stone-700" size={24} />
                   </div>
                   <div>
-                    <p className="font-medium">GitHub</p>
-                    <p className="text-gray-600">@Jim9code</p>
+                    <p className="font-medium text-stone-900">GitHub</p>
+                    <p className="text-stone-600">@Jim9code</p>
                   </div>
                 </motion.a>
 
@@ -131,14 +131,14 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 5, scale: 1.02 }}
-                  className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all duration-200 group"
+                  className="flex items-center p-4 bg-white border border-stone-200/90 rounded-xl hover:border-blue-400 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className="p-3 bg-blue-100 rounded-lg mr-4 group-hover:bg-blue-200 transition-colors duration-200">
+                  <div className="p-3 bg-blue-50 rounded-lg mr-4 group-hover:bg-blue-100 transition-colors duration-200">
                     <Linkedin className="text-blue-600" size={24} />
                   </div>
                   <div>
-                    <p className="font-medium">LinkedIn</p>
-                    <p className="text-gray-600">Jethro Daspan</p>
+                    <p className="font-medium text-stone-900">LinkedIn</p>
+                    <p className="text-stone-600">Jethro Daspan</p>
                   </div>
                 </motion.a>
               </div>
@@ -146,17 +146,17 @@ const Contact: React.FC = () => {
               {/* Quick Response Promise */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="bg-green-50 border border-green-200 rounded-lg p-4 mt-6"
+                className="bg-emerald-50/80 border border-emerald-200/70 rounded-xl p-4 mt-6"
               >
-                <div className="flex items-center text-green-700">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                  <span className="font-medium">Usually responds within 24 hours</span>
+                <div className="flex items-center text-emerald-800">
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-pulse"></div>
+                  <span className="font-medium text-sm">Usually responds within 24 hours</span>
                 </div>
               </motion.div>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+              <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-2xl shadow-sm border border-stone-200/90">
                 {/* Logo at top of form */}
                 <div className="flex justify-center mb-6">
                   <img 
@@ -166,7 +166,7 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 
-                <h3 className="text-xl font-medium mb-6 text-center">Send a Message</h3>
+                <h3 className="text-xl font-medium mb-6 text-center text-stone-900">Send a Message</h3>
                 
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">

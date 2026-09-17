@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden bg-[#FAF7F2]">
       {/* Background Code Pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-20 left-10 text-xs font-mono">
@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
           {`}`}
         </div>
         <div className="absolute top-40 right-20 text-xs font-mono">
-          {`const skills = ['React', 'Node.js', 'AI'];`}
+          {`const skills = ['React', 'Node.js', 'Solidity', 'Web3'];`}
         </div>
         <div className="absolute bottom-40 left-20 text-xs font-mono">
           {`// Always learning, always coding`}
@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
               />
             </span> and{' '}
             <span className="text-black font-medium relative">
-              AI Integration
+              Web3 Development
               <motion.div
                 className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-500"
                 initial={{ scaleX: 0 }}
@@ -136,7 +136,7 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            I build scalable systems and intelligent applications that solve real-world problems
+            I build scalable backend systems, high-performance web applications, and smart contracts
           </motion.p>
 
           <motion.div
