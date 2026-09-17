@@ -166,7 +166,7 @@ const Hero: React.FC = () => {
                 <Github size={20} />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/jethro-daspan-b95b772b9"
+                href="https://www.linkedin.com/in/rinfwang-yusuf-daspan-b95b772b9"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, y: -2 }}

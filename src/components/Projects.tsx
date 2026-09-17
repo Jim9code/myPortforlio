@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Star, GitBranch, Eye, Lock, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Github, Lock } from 'lucide-react';
 
 interface Project {
   title: string;
@@ -11,7 +11,6 @@ interface Project {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
-  stats: { stars: number; forks: number; views: number };
   image?: string;
   gradient?: string;
   emoji?: string;
@@ -33,7 +32,6 @@ const Projects: React.FC = () => {
       technologies: ['Svelte', 'Node.js', 'Express', 'Meta Graph API', 'Tailwind CSS', 'REST API'],
       liveUrl: 'https://www.nexfloapp.com/',
       featured: true,
-      stats: { stars: 38, forks: 14, views: 420 },
       image: '/nexflo.png',
       gradient: 'from-purple-600 via-pink-600 to-rose-500',
       emoji: '⚡'
@@ -46,7 +44,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://easybuy-web.onrender.com/',
       githubUrl: 'https://github.com/Jim9code/easybuy',
       featured: true,
-      stats: { stars: 34, forks: 11, views: 350 },
       image: '/easybuy.png',
       gradient: 'from-blue-600 via-indigo-600 to-cyan-500',
       emoji: '🛒'
@@ -58,7 +55,6 @@ const Projects: React.FC = () => {
       technologies: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'PostgreSQL'],
       liveUrl: 'https://oceanpulse.tech/home',
       featured: true,
-      stats: { stars: 42, forks: 16, views: 480 },
       image: '/oceanpulse.png',
       gradient: 'from-teal-500 via-cyan-600 to-blue-600',
       emoji: '🌊'
@@ -72,7 +68,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://truckbook.vercel.app',
       githubUrl: 'https://github.com/Jim9code/truckbook',
       featured: false,
-      stats: { stars: 12, forks: 4, views: 180 },
       cardStyle: 'white',
       accentType: 'pin',
       pinColor: 'bg-orange-500',
@@ -90,7 +85,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://stylesfurniture.vercel.app',
       githubUrl: 'https://github.com/Jim9code/stylesfurniture',
       featured: false,
-      stats: { stars: 15, forks: 5, views: 210 },
       cardStyle: 'yellow',
       accentType: 'tape',
       rotationClass: 'rotate-2 md:rotate-2',
@@ -106,7 +100,6 @@ const Projects: React.FC = () => {
       technologies: ['TypeScript', 'Node.js', 'REST API'],
       githubUrl: 'https://github.com/Jim9code/Adashe',
       featured: false,
-      stats: { stars: 18, forks: 5, views: 150 },
       cardStyle: 'dark',
       accentType: 'pin',
       pinColor: 'bg-amber-400',
@@ -124,7 +117,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://pq-finder.vercel.app',
       githubUrl: 'https://github.com/Jim9code/pq_finder',
       featured: false,
-      stats: { stars: 22, forks: 8, views: 340 },
       cardStyle: 'cream',
       accentType: 'tape',
       rotationClass: 'rotate-3 md:rotate-2.5',
@@ -141,7 +133,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://forexacademy-blue.vercel.app',
       githubUrl: 'https://github.com/Jim9code/forexacademy',
       featured: false,
-      stats: { stars: 19, forks: 6, views: 275 },
       cardStyle: 'white',
       accentType: 'pin',
       pinColor: 'bg-blue-600',
@@ -159,7 +150,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://acquisition-eosin.vercel.app',
       githubUrl: 'https://github.com/Jim9code/Acquisition',
       featured: false,
-      stats: { stars: 14, forks: 3, views: 165 },
       cardStyle: 'yellow',
       accentType: 'tape',
       rotationClass: 'rotate-1.5 md:rotate-2',
@@ -176,7 +166,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://travel-hotel-onboard.vercel.app',
       githubUrl: 'https://github.com/Jim9code/travel_hotelOnboard',
       featured: false,
-      stats: { stars: 16, forks: 4, views: 195 },
       cardStyle: 'white',
       accentType: 'tape',
       rotationClass: '-rotate-2 md:-rotate-1.5',
@@ -192,7 +181,6 @@ const Projects: React.FC = () => {
       technologies: ['Python', 'Automation', 'Trading API'],
       githubUrl: 'https://github.com/Jim9code/JETHFEX_bot',
       featured: false,
-      stats: { stars: 25, forks: 9, views: 310 },
       cardStyle: 'dark',
       accentType: 'pin',
       pinColor: 'bg-emerald-400',
@@ -210,7 +198,6 @@ const Projects: React.FC = () => {
       liveUrl: 'https://blooming-chiken.vercel.app',
       githubUrl: 'https://github.com/Jim9code/bloomingChiken',
       featured: false,
-      stats: { stars: 11, forks: 2, views: 130 },
       cardStyle: 'cream',
       accentType: 'tape',
       rotationClass: '-rotate-1.5 md:-rotate-2',
@@ -307,21 +294,6 @@ const Projects: React.FC = () => {
                   </div>
 
                   <div>
-                    <div className="flex items-center gap-4 mb-6 text-sm text-stone-500">
-                      <div className="flex items-center gap-1">
-                        <Star size={14} className="text-amber-500 fill-amber-500" />
-                        <span>{project.stats.stars}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <GitBranch size={14} />
-                        <span>{project.stats.forks}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Eye size={14} />
-                        <span>{project.stats.views}</span>
-                      </div>
-                    </div>
-                    
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
@@ -454,13 +426,11 @@ const Projects: React.FC = () => {
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-14 h-4 bg-white/70 backdrop-blur-[1px] border border-black/10 shadow-xs rotate-[-1.5deg] rounded-xs z-20 pointer-events-none" />
                   )}
 
-                  {/* 5-Star Rating Header like review wall */}
+                  {/* Card Header: Category & Action Links */}
                   <div className="flex items-center justify-between mb-3.5">
-                    <div className="flex items-center gap-1 text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={13} className="fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
+                    <span className={`text-[11px] font-semibold uppercase tracking-wider ${isDark ? 'text-amber-400' : 'text-stone-500'}`}>
+                      {project.category}
+                    </span>
 
                     {/* Action Links */}
                     <div className="flex items-center gap-1.5 relative z-10">
@@ -509,16 +479,11 @@ const Projects: React.FC = () => {
                     {project.description}
                   </p>
 
-                  {/* Author / Info Footer with Stamp Badge */}
+                  {/* Title & Stamp Badge Footer */}
                   <div className={`pt-3.5 border-t flex items-center justify-between gap-2 mt-auto ${isDark ? 'border-stone-800' : 'border-stone-200/70'}`}>
-                    <div>
-                      <h4 className={`text-xs font-bold ${isDark ? 'text-white' : 'text-stone-900'}`}>
-                        {project.title}
-                      </h4>
-                      <span className={`text-[10px] ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
-                        {project.category}
-                      </span>
-                    </div>
+                    <h4 className={`text-xs font-bold tracking-tight ${isDark ? 'text-white' : 'text-stone-900'}`}>
+                      {project.title}
+                    </h4>
 
                     {project.stampBadge && (
                       <span className={`px-2 py-0.5 rounded-md text-[10px] font-semibold border ${project.stampColor || 'border-stone-300 text-stone-700 bg-stone-100'}`}>

@@ -127,7 +127,7 @@ const Contact: React.FC = () => {
                 </motion.a>
 
                 <motion.a
-                  href="https://www.linkedin.com/in/jethro-daspan-b95b772b9"
+                  href="https://www.linkedin.com/in/rinfwang-yusuf-daspan-b95b772b9"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 5, scale: 1.02 }}
@@ -138,7 +138,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="font-medium text-stone-900">LinkedIn</p>
-                    <p className="text-stone-600">Jethro Daspan</p>
+                    <p className="text-stone-600">Rinfwang Yusuf Daspan</p>
                   </div>
                 </motion.a>
               </div>
