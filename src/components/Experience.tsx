@@ -125,11 +125,24 @@ const Experience: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm text-stone-500 leading-relaxed max-w-xs"
+              className="text-sm text-stone-500 leading-relaxed max-w-xs mb-6"
             >
               Engineering roles leading backend architecture, crafting software platforms, and
               maintaining production systems.
             </motion.p>
+            <motion.a
+              href="/Rinfwang_Daspan_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-stone-900 border border-stone-300 hover:border-stone-950 px-4 py-2 rounded-full transition-colors"
+            >
+              <span>Download Resume (PDF)</span>
+              <ArrowUpRight size={14} />
+            </motion.a>
           </div>
 
           {/* Right Multi-Column Cardless Editorial Ledger with Collapsible Mobile Details */}

@@ -1,0 +1,183 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R /Annots [8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 15 0 R 16 0 R 17 0 R] >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+7 0 obj
+<< /Length 10115 >>
+stream
+BT /F2 18.50 Tf 0.040 0.040 0.060 rg 198.94 803.89 Td (RINFWANG DASPAN) Tj ET
+BT /F1 10.00 Tf 0.220 0.220 0.250 rg 134.24 789.39 Td (Software Engineer  |  Backend Architecture, Distributed Systems & Web3) Tj ET
+BT /F1 8.50 Tf 0.220 0.220 0.250 rg 29.58 776.39 Td (Abuja, NG \(Remote\)) Tj ET
+BT /F1 8.50 Tf 0.450 0.450 0.480 rg 106.57 776.39 Td (  |  ) Tj ET
+BT /F1 8.50 Tf 0.100 0.220 0.450 rg 120.75 776.39 Td (+234 701 427 8746) Tj ET
+BT /F1 8.50 Tf 0.450 0.450 0.480 rg 194.24 776.39 Td (  |  ) Tj ET
+BT /F1 8.50 Tf 0.100 0.220 0.450 rg 208.42 776.39 Td (rinfwang4@gmail.com) Tj ET
+BT /F1 8.50 Tf 0.450 0.450 0.480 rg 292.62 776.39 Td (  |  ) Tj ET
+BT /F1 8.50 Tf 0.100 0.220 0.450 rg 306.80 776.39 Td (rinfwangdaspan-dev.vercel.app) Tj ET
+BT /F1 8.50 Tf 0.450 0.450 0.480 rg 424.91 776.39 Td (  |  ) Tj ET
+BT /F1 8.50 Tf 0.100 0.220 0.450 rg 439.08 776.39 Td (github.com/Jim9code) Tj ET
+BT /F1 8.50 Tf 0.450 0.450 0.480 rg 519.39 776.39 Td (  |  ) Tj ET
+BT /F1 8.50 Tf 0.100 0.220 0.450 rg 533.57 776.39 Td (LinkedIn) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 757.39 Td (PROFESSIONAL SUMMARY) Tj ET
+0.65 w 0.180 0.180 0.200 RG 42.00 753.89 m 553.28 753.89 l S
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 42.00 742.39 Td (Results-driven Software Engineer specializing in high-throughput backend architectures, RESTful APIs, distributed systems,) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 42.00 730.59 Td (and full-stack web applications. Proven track record of leading backend engineering teams and building production SaaS) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 42.00 718.79 Td (platforms from zero to scale using Node.js, TypeScript, Express, Laravel, React, Svelte, PostgreSQL, and Solidity.) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 692.99 Td (TECHNICAL SKILLS) Tj ET
+0.65 w 0.180 0.180 0.200 RG 42.00 689.49 m 553.28 689.49 l S
+BT /F2 9.20 Tf 0.050 0.050 0.070 rg 42.00 677.99 Td (Languages:) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 677.99 Td (TypeScript, JavaScript \(ES6+\), PHP, Solidity, Python, SQL, HTML5, CSS3) Tj ET
+BT /F2 9.20 Tf 0.050 0.050 0.070 rg 42.00 664.99 Td (Backend & APIs:) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 664.99 Td (Node.js, Express.js, Laravel, RESTful API Design, Microservices, Webhooks, Meta Graph) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 652.79 Td (API, JWT / OAuth 2.0) Tj ET
+BT /F2 9.20 Tf 0.050 0.050 0.070 rg 42.00 639.79 Td (Frontend & Web3:) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 639.79 Td (React.js, Svelte, SvelteKit, Tailwind CSS, Smart Contracts, Decentralized Applications) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 627.59 Td (\(dApps\)) Tj ET
+BT /F2 9.20 Tf 0.050 0.050 0.070 rg 42.00 614.59 Td (Databases & DevOps:) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 614.59 Td (PostgreSQL, MySQL, MongoDB, Redis \(Caching & Queues\), Docker, Git, GitHub Actions) Tj ET
+BT /F1 9.20 Tf 0.160 0.160 0.180 rg 174.00 602.39 Td (\(CI/CD\), Linux, Vercel) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 576.39 Td (WORK EXPERIENCE) Tj ET
+0.65 w 0.180 0.180 0.200 RG 42.00 572.89 m 553.28 572.89 l S
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 561.39 Td (Lead Node.js Backend Engineer) Tj ET
+BT /F2 9.20 Tf 0.180 0.180 0.200 rg 487.81 561.39 Td (2024 - Present) Tj ET
+BT /F3 9.30 Tf 0.200 0.200 0.230 rg 42.00 549.39 Td (Ocean Pulse \(oceanpulse.tech\)) Tj ET
+BT /F3 9.00 Tf 0.300 0.300 0.330 rg 496.76 549.39 Td (Abuja, Nigeria) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 537.19 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 537.19 Td (Lead core backend engineering and system architecture, designing fault-tolerant RESTful APIs and distributed services) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 525.59 Td (using Node.js, Express, and TypeScript.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 512.99 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 512.99 Td (Architect normalized PostgreSQL database schemas, composite indexing strategies, and Redis caching layers that reduce) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 501.39 Td (API response latency across enterprise workloads.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 488.79 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 488.79 Td (Engineer secure multi-tenant authentication pipelines, role-based access control \(RBAC\), and automated business logic) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 477.19 Td (workflows for B2B clients.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 464.59 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 464.59 Td (Direct technical architecture decisions, enforce API design standards, lead peer code reviews, and maintain automated) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 452.99 Td (CI/CD deployment pipelines.) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 436.89 Td (Software Engineer \(Founding / Sole Engineer\)) Tj ET
+BT /F2 9.20 Tf 0.180 0.180 0.200 rg 487.81 436.89 Td (2026 - Present) Tj ET
+BT /F3 9.30 Tf 0.200 0.200 0.230 rg 42.00 424.89 Td (Nexflo \(nexfloapp.com\)) Tj ET
+BT /F3 9.00 Tf 0.300 0.300 0.330 rg 521.77 424.89 Td (Remote) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 412.69 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 412.69 Td (Architected, engineered, and launched the entire Nexflo SaaS platform end-to-end from scratch as the sole software) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 401.09 Td (engineer using Svelte, Node.js, and Express.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 388.49 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 388.49 Td (Built a real-time webhook ingestion and event-driven automation engine integrated with the Meta Graph API to convert) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 376.89 Td (Instagram comments and DMs into qualified leads.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 364.29 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 364.29 Td (Designed custom keyword trigger pipelines, automated multi-step DM conversation funnels, and real-time CRM) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 352.69 Td (synchronization for business accounts.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 340.09 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 340.09 Td (Manage production infrastructure, server health monitoring, rate-limit handling, and continuous feature delivery.) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 323.99 Td (Junior Software Developer) Tj ET
+BT /F2 9.20 Tf 0.180 0.180 0.200 rg 500.01 323.99 Td (2024 - 2025) Tj ET
+BT /F3 9.30 Tf 0.200 0.200 0.230 rg 42.00 311.99 Td (TheTravelHunters) Tj ET
+BT /F3 9.00 Tf 0.300 0.300 0.330 rg 496.76 311.99 Td (Abuja, Nigeria) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 299.79 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 299.79 Td (Developed responsive frontend web interfaces in React and JavaScript while integrating asynchronous RESTful backend) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 288.19 Td (endpoints in Node.js.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 275.59 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 275.59 Td (Designed relational and NoSQL data models across MySQL and MongoDB, implementing query optimizations and session) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 263.99 Td (authentication flows.) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 251.39 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 251.39 Td (Collaborated within cross-functional Agile sprints, contributing to sprint planning, bug triage, peer code reviews, and) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 239.79 Td (production releases.) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 210.69 Td (SELECTED PRODUCTION PROJECTS) Tj ET
+0.65 w 0.180 0.180 0.200 RG 42.00 207.19 m 553.28 207.19 l S
+BT /F2 9.80 Tf 0.050 0.050 0.070 rg 42.00 195.69 Td (Nexflo \(Lead Automation Platform\)) Tj ET
+BT /F3 8.90 Tf 0.260 0.260 0.290 rg 209.10 195.69 Td (  |  Svelte, Node.js, Express, Meta Graph API) Tj ET
+BT /F1 8.90 Tf 0.120 0.240 0.480 rg 495.40 195.69 Td (nexfloapp.com) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 183.69 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 183.69 Td (Automated Instagram comment and DM lead generation SaaS platform converting social engagements into qualified sales) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 172.09 Td (leads in real time.) Tj ET
+BT /F2 9.80 Tf 0.050 0.050 0.070 rg 42.00 156.49 Td (EasyBuy \(B2B Sourcing Platform\)) Tj ET
+BT /F3 8.90 Tf 0.260 0.260 0.290 rg 205.55 156.49 Td (  |  Laravel, PHP, MySQL, Tailwind CSS, REST API) Tj ET
+BT /F1 8.90 Tf 0.120 0.240 0.480 rg 443.47 156.49 Td (easybuy-web.onrender.com) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 144.49 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 144.49 Td (B2B wholesale procurement platform connecting corporate buyers to verified manufacturers with automated) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 132.89 Td (Request-for-Quote \(RFQ\) workflows.) Tj ET
+BT /F2 9.80 Tf 0.050 0.050 0.070 rg 42.00 117.29 Td (Ocean Pulse \(Enterprise Tech Platform\)) Tj ET
+BT /F3 8.90 Tf 0.260 0.260 0.290 rg 234.50 117.29 Td (  |  React, TypeScript, Node.js, PostgreSQL) Tj ET
+BT /F1 8.90 Tf 0.120 0.240 0.480 rg 463.74 117.29 Td (oceanpulse.tech/home) Tj ET
+BT /F2 9.00 Tf 0.250 0.250 0.280 rg 48.00 105.29 Td (-) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 105.29 Td (Enterprise technology platform delivering custom software architecture and scalable backend infrastructure for global) Tj ET
+BT /F1 9.10 Tf 0.140 0.140 0.160 rg 57.00 93.69 Td (digital commerce.) Tj ET
+BT /F2 10.00 Tf 0.050 0.050 0.070 rg 42.00 65.09 Td (EDUCATION) Tj ET
+0.65 w 0.180 0.180 0.200 RG 42.00 61.59 m 553.28 61.59 l S
+BT /F2 9.80 Tf 0.050 0.050 0.070 rg 42.00 50.09 Td (African University of Science and Technology \(AUST\)) Tj ET
+BT /F2 9.20 Tf 0.180 0.180 0.200 rg 500.01 50.09 Td (2024 - 2028) Tj ET
+BT /F3 9.20 Tf 0.180 0.180 0.200 rg 42.00 37.89 Td (Bachelor of Science \(B.Sc.\) in Software Engineering) Tj ET
+BT /F3 9.00 Tf 0.300 0.300 0.330 rg 496.76 37.89 Td (Abuja, Nigeria) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Annot /Subtype /Link /Rect [120.75 774.39 194.24 786.39] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://wa.me/2347014278746) >> >>
+endobj
+9 0 obj
+<< /Type /Annot /Subtype /Link /Rect [208.42 774.39 292.62 786.39] /Border [0 0 0] /A << /Type /Action /S /URI /URI (mailto:rinfwang4@gmail.com) >> >>
+endobj
+10 0 obj
+<< /Type /Annot /Subtype /Link /Rect [306.80 774.39 424.91 786.39] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://rinfwangdaspan-dev.vercel.app) >> >>
+endobj
+11 0 obj
+<< /Type /Annot /Subtype /Link /Rect [439.08 774.39 519.39 786.39] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://github.com/Jim9code/) >> >>
+endobj
+12 0 obj
+<< /Type /Annot /Subtype /Link /Rect [533.57 774.39 565.70 786.39] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://www.linkedin.com/in/rinfwang-yusuf-daspan-b95b772b9) >> >>
+endobj
+13 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42.00 547.39 171.74 559.39] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://oceanpulse.tech/home) >> >>
+endobj
+14 0 obj
+<< /Type /Annot /Subtype /Link /Rect [42.00 422.89 137.61 434.89] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://www.nexfloapp.com/) >> >>
+endobj
+15 0 obj
+<< /Type /Annot /Subtype /Link /Rect [495.40 193.69 553.28 205.69] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://www.nexfloapp.com/) >> >>
+endobj
+16 0 obj
+<< /Type /Annot /Subtype /Link /Rect [443.47 154.49 553.28 166.49] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://easybuy-web.onrender.com/) >> >>
+endobj
+17 0 obj
+<< /Type /Annot /Subtype /Link /Rect [463.74 115.29 553.28 127.29] /Border [0 0 0] /A << /Type /Action /S /URI /URI (https://oceanpulse.tech/home) >> >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000351 00000 n 
+0000000448 00000 n 
+0000000550 00000 n 
+0000000655 00000 n 
+0000010823 00000 n 
+0000010990 00000 n 
+0000011156 00000 n 
+0000011334 00000 n 
+0000011503 00000 n 
+0000011703 00000 n 
+0000011871 00000 n 
+0000012037 00000 n 
+0000012204 00000 n 
+0000012378 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R >>
+startxref
+12547
+%%EOF

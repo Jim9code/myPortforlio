@@ -9,6 +9,8 @@ import {
   Briefcase,
   Layers,
   BookOpen,
+  FileText,
+  ArrowUpRight,
   Terminal,
   X
 } from 'lucide-react';
@@ -117,10 +119,13 @@ const Hero: React.FC = () => {
 
     let reply = '';
     if (cmd === 'help') {
-      reply = 'Available commands: whoami, stack, work, experience, contact, clear';
+      reply = 'Available commands: whoami, stack, work, experience, resume, contact, clear';
     } else if (cmd === 'whoami') {
       reply =
         'Rinfwang Daspan — Software Engineer building resilient backends, distributed systems, and smart contracts.';
+    } else if (cmd === 'resume' || cmd === 'cv') {
+      reply = 'Opening Rinfwang_Daspan_Resume.pdf...';
+      window.open('/Rinfwang_Daspan_Resume.pdf', '_blank', 'noopener,noreferrer');
     } else if (cmd === 'stack' || cmd === 'skills') {
       reply =
         'Core Stack: Node.js, TypeScript, Express, Laravel, Solidity, React, Svelte, PostgreSQL, Redis, Docker.';
@@ -284,6 +289,30 @@ const Hero: React.FC = () => {
                   </motion.button>
                 );
               })}
+              <motion.a
+                href="/Rinfwang_Daspan_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.38 + navLinks.length * 0.07,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="flex items-center gap-3 hover:text-stone-950 transition-colors group"
+              >
+                <FileText
+                  size={14}
+                  strokeWidth={1.6}
+                  className="text-stone-400 group-hover:text-stone-950 transition-colors"
+                />
+                <span>Resume</span>
+                <ArrowUpRight
+                  size={12}
+                  className="text-stone-400 group-hover:text-stone-950 transition-colors -ml-1.5"
+                />
+              </motion.a>
             </nav>
           </div>
 
@@ -360,17 +389,32 @@ const Hero: React.FC = () => {
               })}
             </div>
 
-            <motion.button
-              type="button"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.65 }}
-              onClick={() => setIsTerminalOpen(true)}
-              className="bg-stone-950 text-[#FDFBF6] px-4 py-1.5 rounded-full text-xs font-medium tracking-tight hover:bg-stone-800 transition-all inline-flex items-center gap-2 shadow-xs"
-            >
-              <span className="font-mono text-[11px] text-stone-400">⌘K</span>
-              <span>Terminal</span>
-            </motion.button>
+            <div className="flex items-center gap-2.5">
+              <motion.a
+                href="/Rinfwang_Daspan_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="border border-stone-300 text-stone-800 hover:border-stone-950 hover:text-stone-950 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-tight transition-all inline-flex items-center gap-1.5"
+              >
+                <FileText size={13} strokeWidth={1.7} />
+                <span>Resume</span>
+              </motion.a>
+
+              <motion.button
+                type="button"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.65 }}
+                onClick={() => setIsTerminalOpen(true)}
+                className="bg-stone-950 text-[#FDFBF6] px-4 py-1.5 rounded-full text-xs font-medium tracking-tight hover:bg-stone-800 transition-all inline-flex items-center gap-2 shadow-xs"
+              >
+                <span className="font-mono text-[11px] text-stone-400">⌘K</span>
+                <span>Terminal</span>
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.div>
