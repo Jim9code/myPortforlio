@@ -14,7 +14,7 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
-  const [showArchive, setShowArchive] = useState(true);
+  const [showArchive, setShowArchive] = useState(false);
   const bentoRef = useRef<HTMLDivElement | null>(null);
 
   // Scroll-Linked Multi-Plane Bento Parallax
@@ -154,6 +154,8 @@ const Projects: React.FC = () => {
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
+  const initialArchiveProjects = otherProjects.slice(0, 3);
+  const expandedArchiveProjects = otherProjects.slice(3);
   const primaryProject = featuredProjects[0];
   const secondaryProjects = featuredProjects.slice(1);
 
@@ -373,21 +375,31 @@ const Projects: React.FC = () => {
             onClick={() => setShowArchive((prev) => !prev)}
             className="w-full pt-4 pb-4 flex items-center justify-between text-left group cursor-pointer"
           >
-            <motion.span
-              initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="font-serif-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-stone-950 tracking-tight group-hover:italic transition-all block"
-            >
-              See all my projects
-            </motion.span>
-            <ArrowUpRight
-              size={24}
-              className={`text-stone-500 group-hover:text-stone-950 transition-transform duration-300 ${
-                showArchive ? 'rotate-90' : ''
-              }`}
-            />
+            <div className="flex items-baseline gap-3">
+              <motion.span
+                initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="font-serif-editorial text-3xl sm:text-4xl md:text-5xl font-normal text-stone-950 tracking-tight group-hover:italic transition-all block"
+              >
+                See all my projects
+              </motion.span>
+              <span className="font-mono text-xs text-stone-400">
+                ({showArchive ? otherProjects.length : initialArchiveProjects.length} of {otherProjects.length})
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-stone-500 group-hover:text-stone-950 transition-colors">
+              <span className="hidden sm:inline">
+                {showArchive ? 'Show less' : `Expand (+${expandedArchiveProjects.length})`}
+              </span>
+              <ArrowUpRight
+                size={22}
+                className={`transition-transform duration-300 ${
+                  showArchive ? 'rotate-90' : ''
+                }`}
+              />
+            </div>
           </button>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -398,95 +410,199 @@ const Projects: React.FC = () => {
           />
         </div>
 
-        {/* Cardless Editorial Archive Ledger with Individual Staggered Rows & Drawing Lines */}
+        {/* Always-Visible Top 3 Archive Projects */}
+        <div>
+          {initialArchiveProjects.map((project, idx) => (
+            <div key={project.title} className="relative">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.55,
+                  delay: idx * 0.05,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group"
+              >
+                {/* Title & Number */}
+                <div className="md:col-span-4 flex items-baseline gap-3">
+                  <span className="font-mono text-xs text-stone-400">
+                    0{idx + 1}
+                  </span>
+                  <div>
+                    <h4 className="font-serif-editorial text-2xl text-stone-950 group-hover:italic transition-all">
+                      {project.title}
+                    </h4>
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-stone-400">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="md:col-span-5 text-sm text-stone-600 leading-relaxed">
+                  {project.description}
+                </div>
+
+                {/* Tech & Direct Links */}
+                <div className="md:col-span-3 flex items-center md:justify-end gap-4">
+                  <span className="font-mono text-xs text-stone-400 hidden sm:inline">
+                    {project.technologies.slice(0, 2).join(' · ')}
+                  </span>
+                  <div className="flex items-center gap-2.5 text-stone-500">
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-stone-950 transition-colors"
+                        title="GitHub Repository"
+                      >
+                        <Github size={16} />
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-0.5 text-xs font-medium text-stone-800 hover:text-stone-950 transition-colors"
+                        title="Live Project"
+                      >
+                        <span>Live</span>
+                        <ArrowUpRight size={15} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.75, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="h-[1px] w-full bg-stone-300/70 origin-left"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Expandable Remaining Archive Projects */}
         <AnimatePresence initial={false}>
           {showArchive && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               className="overflow-hidden"
             >
               <div>
-                {otherProjects.map((project, idx) => (
-                  <div key={project.title} className="relative">
-                    <motion.div
-                      initial={{ opacity: 0, y: 18 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{
-                        duration: 0.55,
-                        delay: idx * 0.04,
-                        ease: [0.16, 1, 0.3, 1]
-                      }}
-                      className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group"
-                    >
-                      {/* Title & Number */}
-                      <div className="md:col-span-4 flex items-baseline gap-3">
-                        <span className="font-mono text-xs text-stone-400">
-                          0{idx + 1}
-                        </span>
-                        <div>
-                          <h4 className="font-serif-editorial text-2xl text-stone-950 group-hover:italic transition-all">
-                            {project.title}
-                          </h4>
-                          <span className="font-mono text-[11px] uppercase tracking-wider text-stone-400">
-                            {project.category}
+                {expandedArchiveProjects.map((project, idx) => {
+                  const displayIndex = idx + initialArchiveProjects.length + 1;
+                  return (
+                    <div key={project.title} className="relative">
+                      <motion.div
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.45,
+                          delay: idx * 0.04,
+                          ease: [0.16, 1, 0.3, 1]
+                        }}
+                        className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline group"
+                      >
+                        {/* Title & Number */}
+                        <div className="md:col-span-4 flex items-baseline gap-3">
+                          <span className="font-mono text-xs text-stone-400">
+                            {displayIndex < 10 ? `0${displayIndex}` : displayIndex}
                           </span>
+                          <div>
+                            <h4 className="font-serif-editorial text-2xl text-stone-950 group-hover:italic transition-all">
+                              {project.title}
+                            </h4>
+                            <span className="font-mono text-[11px] uppercase tracking-wider text-stone-400">
+                              {project.category}
+                            </span>
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Description */}
-                      <div className="md:col-span-5 text-sm text-stone-600 leading-relaxed">
-                        {project.description}
-                      </div>
-
-                      {/* Tech & Direct Links */}
-                      <div className="md:col-span-3 flex items-center md:justify-end gap-4">
-                        <span className="font-mono text-xs text-stone-400 hidden sm:inline">
-                          {project.technologies.slice(0, 2).join(' · ')}
-                        </span>
-                        <div className="flex items-center gap-2.5 text-stone-500">
-                          {project.githubUrl && (
-                            <a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="hover:text-stone-950 transition-colors"
-                              title="GitHub Repository"
-                            >
-                              <Github size={16} />
-                            </a>
-                          )}
-                          {project.liveUrl && (
-                            <a
-                              href={project.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-0.5 text-xs font-medium text-stone-800 hover:text-stone-950 transition-colors"
-                              title="Live Project"
-                            >
-                              <span>Live</span>
-                              <ArrowUpRight size={15} />
-                            </a>
-                          )}
+                        {/* Description */}
+                        <div className="md:col-span-5 text-sm text-stone-600 leading-relaxed">
+                          {project.description}
                         </div>
-                      </div>
-                    </motion.div>
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.75, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                      className="h-[1px] w-full bg-stone-300/70 origin-left"
-                    />
-                  </div>
-                ))}
+
+                        {/* Tech & Direct Links */}
+                        <div className="md:col-span-3 flex items-center md:justify-end gap-4">
+                          <span className="font-mono text-xs text-stone-400 hidden sm:inline">
+                            {project.technologies.slice(0, 2).join(' · ')}
+                          </span>
+                          <div className="flex items-center gap-2.5 text-stone-500">
+                            {project.githubUrl && (
+                              <a
+                                href={project.githubUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-stone-950 transition-colors"
+                                title="GitHub Repository"
+                              >
+                                <Github size={16} />
+                              </a>
+                            )}
+                            {project.liveUrl && (
+                              <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-0.5 text-xs font-medium text-stone-800 hover:text-stone-950 transition-colors"
+                                title="Live Project"
+                              >
+                                <span>Live</span>
+                                <ArrowUpRight size={15} />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                      <div className="h-[1px] w-full bg-stone-300/70" />
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Bottom Footer Row: Expand/Collapse Toggle + Direct Link to GitHub for More */}
+        <div className="pt-6 flex flex-wrap items-center justify-between gap-4">
+          <button
+            type="button"
+            onClick={() => setShowArchive((prev) => !prev)}
+            className="font-mono text-xs uppercase tracking-widest text-stone-600 hover:text-stone-950 transition-colors inline-flex items-center gap-1.5"
+          >
+            <span>
+              {showArchive
+                ? 'Collapse archive'
+                : `Expand ${expandedArchiveProjects.length} more projects`}
+            </span>
+            <ArrowUpRight
+              size={14}
+              className={`transition-transform duration-300 ${showArchive ? '-rotate-90' : 'rotate-90'}`}
+            />
+          </button>
+
+          <a
+            href="https://github.com/Jim9code/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-stone-700 hover:text-stone-950 transition-colors group"
+          >
+            <Github size={14} className="text-stone-500 group-hover:text-stone-950 transition-colors" />
+            <span>See more projects on GitHub</span>
+            <ArrowUpRight size={14} />
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import {
   Github,
   Linkedin,
+  Instagram,
   Mail,
   User,
   Briefcase,
@@ -27,6 +28,32 @@ const WhatsAppIcon: React.FC<{ size?: number }> = ({ size = 17 }) => (
   >
     <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
     <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+  </svg>
+);
+
+const XBrandIcon: React.FC<{ size?: number }> = ({ size = 16 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const TikTokIcon: React.FC<{ size?: number }> = ({ size = 16 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.7}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
   </svg>
 );
 
@@ -269,7 +296,7 @@ const Hero: React.FC = () => {
               className="absolute top-0 left-0 right-0 h-[1px] bg-stone-300/55 origin-left"
             />
 
-            <div className="flex items-center gap-5 text-stone-400">
+            <div className="flex items-center gap-4 sm:gap-5 text-stone-400">
               {[
                 {
                   href: 'https://github.com/Jim9code/',
@@ -281,6 +308,24 @@ const Hero: React.FC = () => {
                   href: 'https://www.linkedin.com/in/rinfwang-yusuf-daspan-b95b772b9',
                   label: 'LinkedIn',
                   icon: Linkedin,
+                  external: true
+                },
+                {
+                  href: 'https://x.com/Jethrinfwang',
+                  label: 'X (Twitter)',
+                  icon: XBrandIcon,
+                  external: true
+                },
+                {
+                  href: 'https://www.instagram.com/thissoftwareguy?dlrf=azhmaDRrOXp6OHll',
+                  label: 'Instagram',
+                  icon: Instagram,
+                  external: true
+                },
+                {
+                  href: 'https://www.tiktok.com/@thissoftwareguy',
+                  label: 'TikTok',
+                  icon: TikTokIcon,
                   external: true
                 },
                 {

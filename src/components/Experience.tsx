@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 
 interface ExperienceItem {
   title: string;
@@ -14,6 +14,35 @@ interface ExperienceItem {
 }
 
 const Experience: React.FC = () => {
+  // On mobile (< 768px), collapse bullet lists by default unless expanded by the user.
+  // On desktop (>= 768px), keep them expanded by default (still toggleable).
+  const [expandedItems, setExpandedItems] = useState<Record<number, boolean>>(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return {};
+    }
+    return { 0: true, 1: true, 2: true };
+  });
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setExpandedItems({});
+      } else {
+        setExpandedItems({ 0: true, 1: true, 2: true });
+      }
+    };
+    mq.addEventListener('change', handleChange);
+    return () => mq.removeEventListener('change', handleChange);
+  }, []);
+
+  const toggleItem = (index: number) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   const experiences: ExperienceItem[] = [
     {
       title: 'Lead Node.js Backend Engineer',
@@ -79,7 +108,7 @@ const Experience: React.FC = () => {
     <section id="experience" className="py-24 px-6 sm:px-10 lg:px-16 bg-transparent relative">
       <div className="max-w-[1320px] mx-auto">
         <div className="grid md:grid-cols-12 gap-12 items-start">
-          {/* Left Sticky Editorial Heading Column (stays still until the end of the section) */}
+          {/* Left Sticky Editorial Heading Column */}
           <div className="md:col-span-4 md:sticky md:top-28 self-start">
             <motion.h2
               initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
@@ -103,7 +132,7 @@ const Experience: React.FC = () => {
             </motion.p>
           </div>
 
-          {/* Right Multi-Column Cardless Editorial Ledger with Individual Staggered Animations */}
+          {/* Right Multi-Column Cardless Editorial Ledger with Collapsible Mobile Details */}
           <div className="md:col-span-8 relative">
             <motion.div
               initial={{ scaleX: 0 }}
@@ -112,111 +141,144 @@ const Experience: React.FC = () => {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="h-[1px] w-full bg-stone-300/75 origin-left"
             />
-            {experiences.map((exp, index) => (
-              <div key={index} className="relative">
-                <div className="py-10">
-                  {/* Period & Location Kicker */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex flex-wrap items-center justify-between gap-2 mb-3"
-                  >
-                    <span className="font-mono text-xs text-stone-500 uppercase tracking-wider">
-                      {exp.period} · {exp.location}
-                    </span>
-                    {exp.type && (
-                      <span className="font-mono text-[11px] text-stone-400">
-                        {exp.type}
+            {experiences.map((exp, index) => {
+              const isExpanded = Boolean(expandedItems[index]);
+              return (
+                <div key={index} className="relative">
+                  <div className="py-8 sm:py-10">
+                    {/* Period & Location Kicker */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 12 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-wrap items-center justify-between gap-2 mb-2.5"
+                    >
+                      <span className="font-mono text-xs text-stone-500 uppercase tracking-wider">
+                        {exp.period} · {exp.location}
                       </span>
-                    )}
-                  </motion.div>
+                      {exp.type && (
+                        <span className="font-mono text-[11px] text-stone-400">
+                          {exp.type}
+                        </span>
+                      )}
+                    </motion.div>
 
-                  {/* Role & Company */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex flex-wrap items-baseline justify-between gap-2 mb-5"
-                  >
-                    <h3 className="font-serif-editorial text-2xl sm:text-3xl text-stone-950">
-                      {exp.title}
-                    </h3>
-                    {exp.companyUrl ? (
-                      <a
-                        href={exp.companyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-medium text-stone-800 hover:text-stone-950 transition-colors"
+                    {/* Role & Company Row */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-wrap items-baseline justify-between gap-2"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleItem(index)}
+                        className="text-left group flex items-baseline gap-2.5 cursor-pointer"
                       >
-                        <span>— {exp.company}</span>
-                        <ArrowUpRight size={14} />
-                      </a>
-                    ) : (
-                      <span className="text-sm font-medium text-stone-700">
-                        — {exp.company}
-                      </span>
-                    )}
-                  </motion.div>
+                        <h3 className="font-serif-editorial text-2xl sm:text-3xl text-stone-950 group-hover:italic transition-all">
+                          {exp.title}
+                        </h3>
+                      </button>
 
-                  {/* Highlights (Each Bullet Animates Individually) */}
-                  <ul className="space-y-2.5 mb-5">
-                    {exp.description.map((item, itemIndex) => (
-                      <motion.li
-                        key={itemIndex}
-                        initial={{ opacity: 0, x: 14 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{
-                          duration: 0.5,
-                          delay: 0.1 + itemIndex * 0.07,
-                          ease: [0.16, 1, 0.3, 1]
-                        }}
-                        className="text-stone-600 text-sm sm:text-base leading-relaxed flex items-start gap-3"
+                      <div className="flex items-center gap-3">
+                        {exp.companyUrl ? (
+                          <a
+                            href={exp.companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-sm font-medium text-stone-800 hover:text-stone-950 transition-colors"
+                          >
+                            <span>— {exp.company}</span>
+                            <ArrowUpRight size={14} />
+                          </a>
+                        ) : (
+                          <span className="text-sm font-medium text-stone-700">
+                            — {exp.company}
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
+
+                    {/* Mobile / Interactive Expand Toggle Button */}
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        onClick={() => toggleItem(index)}
+                        className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-stone-500 hover:text-stone-950 transition-colors"
                       >
-                        <span className="text-stone-400 select-none">—</span>
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  {/* Subtle Inline Stack (Each Tag Animates Individually) */}
-                  {exp.technologies && (
-                    <div className="flex flex-wrap gap-x-2 gap-y-1 pt-2">
-                      {exp.technologies.map((tech, tIdx) => (
-                        <motion.span
-                          key={tech}
-                          initial={{ opacity: 0, y: 8 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.3 }}
-                          transition={{
-                            duration: 0.4,
-                            delay: 0.18 + tIdx * 0.04,
-                            ease: [0.16, 1, 0.3, 1]
-                          }}
-                          className="font-mono text-xs text-stone-400"
-                        >
-                          {tech}
-                          {tIdx < exp.technologies!.length - 1 && (
-                            <span className="ml-2 text-stone-300">/</span>
-                          )}
-                        </motion.span>
-                      ))}
+                        <span>{isExpanded ? 'Hide details' : 'View details'}</span>
+                        <ChevronDown
+                          size={13}
+                          className={`transition-transform duration-300 ${
+                            isExpanded ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
                     </div>
-                  )}
-                </div>
 
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                  className="h-[1px] w-full bg-stone-300/75 origin-left"
-                />
-              </div>
-            ))}
+                    {/* Collapsible Highlights & Tech Stack */}
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-5">
+                            <ul className="space-y-2.5 mb-5">
+                              {exp.description.map((item, itemIndex) => (
+                                <motion.li
+                                  key={itemIndex}
+                                  initial={{ opacity: 0, x: 10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{
+                                    duration: 0.35,
+                                    delay: itemIndex * 0.04,
+                                    ease: [0.16, 1, 0.3, 1]
+                                  }}
+                                  className="text-stone-600 text-sm sm:text-base leading-relaxed flex items-start gap-3"
+                                >
+                                  <span className="text-stone-400 select-none">—</span>
+                                  <span>{item}</span>
+                                </motion.li>
+                              ))}
+                            </ul>
+
+                            {exp.technologies && (
+                              <div className="flex flex-wrap gap-x-2 gap-y-1 pt-1">
+                                {exp.technologies.map((tech, tIdx) => (
+                                  <span
+                                    key={tech}
+                                    className="font-mono text-xs text-stone-400"
+                                  >
+                                    {tech}
+                                    {tIdx < exp.technologies!.length - 1 && (
+                                      <span className="ml-2 text-stone-300">/</span>
+                                    )}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-[1px] w-full bg-stone-300/75 origin-left"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

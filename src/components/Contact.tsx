@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, ArrowUpRight } from 'lucide-react';
+import { Mail, Github, Linkedin, Instagram, ArrowUpRight } from 'lucide-react';
 
 const WhatsAppIcon: React.FC<{ size?: number }> = ({ size = 19 }) => (
   <svg
@@ -15,6 +15,32 @@ const WhatsAppIcon: React.FC<{ size?: number }> = ({ size = 19 }) => (
   >
     <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
     <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+  </svg>
+);
+
+const XBrandIcon: React.FC<{ size?: number }> = ({ size = 17 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const TikTokIcon: React.FC<{ size?: number }> = ({ size = 18 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.75}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
   </svg>
 );
 
@@ -38,29 +64,6 @@ const Contact: React.FC = () => {
     });
   };
 
-  const contactChannels = [
-    {
-      label: 'rinfwang4@gmail.com',
-      href: 'mailto:rinfwang4@gmail.com',
-      external: false
-    },
-    {
-      label: 'WhatsApp — +234 701 427 8746',
-      href: 'https://wa.me/2347014278746',
-      external: true
-    },
-    {
-      label: 'github.com/Jim9code',
-      href: 'https://github.com/Jim9code/',
-      external: true
-    },
-    {
-      label: 'LinkedIn — Rinfwang Yusuf Daspan',
-      href: 'https://www.linkedin.com/in/rinfwang-yusuf-daspan-b95b772b9',
-      external: true
-    }
-  ];
-
   return (
     <section id="contact" className="py-24 pb-36 px-6 sm:px-10 lg:px-16 bg-transparent relative">
       <div className="max-w-[1320px] mx-auto relative z-10">
@@ -74,8 +77,8 @@ const Contact: React.FC = () => {
         />
 
         <div className="grid md:grid-cols-12 gap-12 items-start">
-          {/* Left Sticky Editorial Heading, Direct Channels & Minimal Icons */}
-          <div className="md:col-span-5 md:sticky md:top-28 self-start space-y-8">
+          {/* Left Sticky Editorial Heading & Minimal Social Icons */}
+          <div className="md:col-span-5 md:sticky md:top-28 self-start space-y-6">
             <div>
               <motion.h2
                 initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
@@ -99,52 +102,32 @@ const Contact: React.FC = () => {
               </motion.p>
             </div>
 
-            <div className="space-y-1 pt-2">
-              {contactChannels.map((ch, idx) => (
-                <div key={ch.label} className="relative">
-                  <motion.a
-                    href={ch.href}
-                    target={ch.external ? '_blank' : undefined}
-                    rel={ch.external ? 'noopener noreferrer' : undefined}
-                    initial={{ opacity: 0, x: -14 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.55,
-                      delay: 0.1 + idx * 0.08,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
-                    className="flex items-center justify-between py-3.5 text-sm text-stone-800 hover:text-stone-950 group"
-                  >
-                    <span>{ch.label}</span>
-                    <ArrowUpRight
-                      size={15}
-                      className="text-stone-400 group-hover:text-stone-950 transition-colors"
-                    />
-                  </motion.a>
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 0.12 + idx * 0.08,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
-                    className="h-[1px] w-full bg-stone-300/70 origin-left"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Bare Minimal Social Row */}
-            <div className="flex items-center gap-5 pt-2 text-stone-400">
+            {/* Minimal Social Icon Row */}
+            <div className="flex items-center gap-5 pt-2 text-stone-500">
               {[
                 { href: 'https://github.com/Jim9code/', label: 'GitHub', icon: Github, ext: true },
                 {
                   href: 'https://www.linkedin.com/in/rinfwang-yusuf-daspan-b95b772b9',
                   label: 'LinkedIn',
                   icon: Linkedin,
+                  ext: true
+                },
+                {
+                  href: 'https://x.com/Jethrinfwang',
+                  label: 'X (Twitter)',
+                  icon: XBrandIcon,
+                  ext: true
+                },
+                {
+                  href: 'https://www.instagram.com/thissoftwareguy?dlrf=azhmaDRrOXp6OHll',
+                  label: 'Instagram',
+                  icon: Instagram,
+                  ext: true
+                },
+                {
+                  href: 'https://www.tiktok.com/@thissoftwareguy',
+                  label: 'TikTok',
+                  icon: TikTokIcon,
                   ext: true
                 },
                 {
