@@ -19,10 +19,9 @@ const ScrollToTop: React.FC = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.dispatchEvent(
+      new CustomEvent('inertial-scroll-to', { detail: { top: 0 } })
+    );
   };
 
   return (

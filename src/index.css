@@ -1,3 +1,108 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    background-color: #FDFBF6;
+    overflow-x: clip;
+  }
+}
+
+.bg-dotted-fixed {
+  background-color: #FDFBF6;
+  background-image: radial-gradient(rgba(120, 113, 108, 0.26) 1.25px, transparent 1.25px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
+}
+
+.font-serif-editorial {
+  font-family: 'Newsreader', 'Instrument Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+/* Leg & Arm Keyframes for Different Movement States */
+@keyframes leg-walk-a {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(18deg); }
+}
+@keyframes leg-walk-b {
+  0%, 100% { transform: rotate(18deg); }
+  50% { transform: rotate(-18deg); }
+}
+
+@keyframes leg-sprint-a {
+  0%, 100% { transform: rotate(-42deg); }
+  50% { transform: rotate(42deg); }
+}
+@keyframes leg-sprint-b {
+  0%, 100% { transform: rotate(42deg); }
+  50% { transform: rotate(-42deg); }
+}
+
+@keyframes leg-moonwalk-a {
+  0% { transform: rotate(22deg) translateY(0); }
+  50% { transform: rotate(-22deg) translateY(-3px); }
+  100% { transform: rotate(22deg) translateY(0); }
+}
+@keyframes leg-moonwalk-b {
+  0% { transform: rotate(-22deg) translateY(-3px); }
+  50% { transform: rotate(22deg) translateY(0); }
+  100% { transform: rotate(-22deg) translateY(-3px); }
+}
+
+@keyframes body-groove {
+  0%, 100% { transform: translateY(0px) rotate(-6deg) scaleY(1); }
+  25% { transform: translateY(-5px) rotate(0deg) scaleY(1.04); }
+  50% { transform: translateY(0px) rotate(6deg) scaleY(0.96); }
+  75% { transform: translateY(-5px) rotate(0deg) scaleY(1.04); }
+}
+
+@keyframes body-walk-bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2.5px); }
+}
+
+@keyframes body-sprint-bob {
+  0%, 100% { transform: translateY(0px) rotate(-14deg); }
+  50% { transform: translateY(-4px) rotate(-16deg); }
+}
+
+.mascot-leg-walk-1 {
+  transform-origin: 32px 62px;
+  animation: leg-walk-a 0.48s ease-in-out infinite;
+}
+.mascot-leg-walk-2 {
+  transform-origin: 40px 62px;
+  animation: leg-walk-b 0.48s ease-in-out infinite;
+}
+
+.mascot-leg-sprint-1 {
+  transform-origin: 32px 62px;
+  animation: leg-sprint-a 0.2s ease-in-out infinite;
+}
+.mascot-leg-sprint-2 {
+  transform-origin: 40px 62px;
+  animation: leg-sprint-b 0.2s ease-in-out infinite;
+}
+
+.mascot-leg-moonwalk-1 {
+  transform-origin: 32px 62px;
+  animation: leg-moonwalk-a 0.55s linear infinite;
+}
+.mascot-leg-moonwalk-2 {
+  transform-origin: 40px 62px;
+  animation: leg-moonwalk-b 0.55s linear infinite;
+}
+
+.mascot-body-walk {
+  animation: body-walk-bob 0.48s ease-in-out infinite;
+}
+.mascot-body-sprint {
+  transform-origin: 36px 50px;
+  animation: body-sprint-bob 0.2s ease-in-out infinite;
+}
+.mascot-body-dance {
+  transform-origin: 36px 60px;
+  animation: body-groove 0.6s ease-in-out infinite;
+}

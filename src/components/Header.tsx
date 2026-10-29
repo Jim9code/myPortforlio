@@ -41,75 +41,86 @@ const Header: React.FC<HeaderProps> = ({ activeSection }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-[#FAF7F2]/90 backdrop-blur-md shadow-sm border-b border-stone-200/80' : 'bg-transparent'
+        isScrolled
+          ? 'bg-[#FDFBF6]/85 backdrop-blur-md border-b border-stone-300/60'
+          : 'bg-transparent'
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="cursor-pointer flex items-center"
+          <button
+            type="button"
+            className="cursor-pointer flex items-center gap-3 text-left group"
             onClick={() => scrollToSection('home')}
           >
-            <picture>
-              <source srcSet="/logo.webp" type="image/webp" />
-              <img 
-                src="/logo.jpeg" 
-                alt="Jethro Daspan Logo" 
-                className="h-10 w-10 object-contain"
-                width={40}
-                height={40}
-                loading="eager"
-                decoding="async"
-              />
-            </picture>
-          </motion.div>
+            <img
+              src="/melogo.jpeg"
+              alt="Rinfwang Daspan Logo"
+              className="h-7 w-7 object-contain rounded-sm"
+              width={28}
+              height={28}
+              loading="eager"
+              decoding="async"
+            />
+            <span className="text-xs font-medium tracking-tight text-stone-800 group-hover:text-black transition-colors">
+              Rinfwang Daspan
+            </span>
+          </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-7">
             {navItems.map((item) => (
-              <motion.button
+              <button
                 key={item.id}
-                whileHover={{ y: -2 }}
+                type="button"
                 onClick={() => scrollToSection(item.id)}
-                className={`relative py-2 transition-colors duration-200 ${
-                  activeSection === item.id ? 'text-black' : 'text-gray-600 hover:text-black'
+                className={`relative py-1 text-xs tracking-wide transition-colors duration-200 ${
+                  activeSection === item.id
+                    ? 'text-stone-950 font-medium'
+                    : 'text-stone-500 hover:text-stone-900'
                 }`}
               >
                 {item.label}
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"
+                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-stone-900"
                   />
                 )}
-              </motion.button>
+              </button>
             ))}
+          </div>
+
+          <div className="hidden md:block text-xs text-stone-500 font-normal">
+            Software Engineer
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            type="button"
+            className="md:hidden p-2 text-stone-800"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden mt-4 py-4 border-t border-gray-200"
+            exit={{ opacity: 0, y: -12 }}
+            className="md:hidden mt-4 py-4 border-t border-stone-300/70 bg-[#FDFBF6]/95 backdrop-blur-md"
           >
             {navItems.map((item) => (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left py-2 transition-colors duration-200 ${
-                  activeSection === item.id ? 'text-black font-medium' : 'text-gray-600'
+                className={`block w-full text-left py-2 text-sm transition-colors duration-200 ${
+                  activeSection === item.id ? 'text-stone-950 font-medium' : 'text-stone-500'
                 }`}
               >
                 {item.label}

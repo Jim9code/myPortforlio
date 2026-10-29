@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, ExternalLink, Briefcase } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface ExperienceItem {
   title: string;
@@ -21,8 +21,16 @@ const Experience: React.FC = () => {
       companyUrl: 'https://oceanpulse.tech/home',
       type: 'Lead Role',
       location: 'Abuja, NG',
-      period: '2024 - Present',
-      technologies: ['Node.js', 'Express', 'TypeScript', 'PostgreSQL', 'Redis', 'Microservices', 'REST APIs'],
+      period: '2024 — Present',
+      technologies: [
+        'Node.js',
+        'Express',
+        'TypeScript',
+        'PostgreSQL',
+        'Redis',
+        'Microservices',
+        'REST APIs'
+      ],
       description: [
         'Lead the core backend architecture, designing scalable RESTful APIs and distributed server systems using Node.js.',
         'Architect high-performance database schemas, query optimizations, and caching layers for enterprise clients.',
@@ -31,15 +39,22 @@ const Experience: React.FC = () => {
       ]
     },
     {
-      title: 'Fullstack Developer',
+      title: 'Software Engineer',
       company: 'Nexflo',
       companyUrl: 'https://www.nexfloapp.com/',
       type: 'Freelance & Maintenance',
       location: 'Remote',
-      period: '2026 - Present',
-      technologies: ['Svelte', 'Node.js', 'Express', 'Meta Graph API', 'Tailwind CSS', 'Webhooks'],
+      period: '2026 — Present',
+      technologies: [
+        'Svelte',
+        'Node.js',
+        'Express',
+        'Meta Graph API',
+        'Tailwind CSS',
+        'Webhooks'
+      ],
       description: [
-        'Architected and built the entire Nexflo platform end-to-end from scratch as the sole fullstack developer.',
+        'Architected and built the entire Nexflo platform end-to-end from scratch as the sole software engineer.',
         'Engineered real-time Instagram Comment & DM lead generation engine integrated with the Meta Graph API.',
         'Implemented custom keyword triggers, automated conversation funnels, and CRM contact synchronization.',
         'Continue to provide active system maintenance, performance optimization, server monitoring, and feature updates.'
@@ -50,7 +65,7 @@ const Experience: React.FC = () => {
       company: 'TheTravelHunters',
       type: 'Full-time',
       location: 'Abuja, NG',
-      period: '2024 - 2025',
+      period: '2024 — 2025',
       technologies: ['JavaScript', 'React', 'Node.js', 'MySQL', 'MongoDB', 'REST APIs'],
       description: [
         'Developed dynamic, responsive web interfaces and integrated backend REST endpoints.',
@@ -60,122 +75,150 @@ const Experience: React.FC = () => {
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: { opacity: 1, y: 0 }
-  };
-
   return (
-    <section id="experience" className="py-20 px-6 bg-[#F5EFEB]/70">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-light mb-4 text-stone-900">Work Experience</h2>
-            <p className="text-stone-600 text-lg max-w-2xl mx-auto">
-              My engineering journey leading backend systems, crafting fullstack platforms, and maintaining production applications.
-            </p>
-          </motion.div>
+    <section id="experience" className="py-24 px-6 sm:px-10 lg:px-16 bg-transparent relative">
+      <div className="max-w-[1320px] mx-auto">
+        <div className="grid md:grid-cols-12 gap-12 items-start">
+          {/* Left Sticky Editorial Heading Column (stays still until the end of the section) */}
+          <div className="md:col-span-4 md:sticky md:top-28 self-start">
+            <motion.h2
+              initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif-editorial text-4xl sm:text-5xl font-normal text-stone-950 tracking-tight leading-[1.08] mb-4"
+            >
+              Work <br className="hidden md:block" />
+              Experience
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm text-stone-500 leading-relaxed max-w-xs"
+            >
+              Engineering roles leading backend architecture, crafting software platforms, and
+              maintaining production systems.
+            </motion.p>
+          </div>
 
-          <div className="space-y-8">
+          {/* Right Multi-Column Cardless Editorial Ledger with Individual Staggered Animations */}
+          <div className="md:col-span-8 relative">
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="h-[1px] w-full bg-stone-300/75 origin-left"
+            />
             {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ y: -3 }}
-                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/90 relative overflow-hidden"
-              >
-                {/* Accent top border */}
-                <div className={`absolute top-0 left-0 right-0 h-1.5 ${
-                  index === 0 ? 'bg-blue-600' : index === 1 ? 'bg-purple-600' : 'bg-stone-400'
-                }`} />
-
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 gap-2">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                      <h3 className="text-2xl font-semibold text-stone-900">{exp.title}</h3>
-                      {exp.type && (
-                        <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          exp.type.includes('Lead')
-                            ? 'bg-blue-100 text-blue-800'
-                            : exp.type.includes('Freelance')
-                            ? 'bg-purple-100 text-purple-800'
-                            : 'bg-stone-100 text-stone-700'
-                        }`}>
-                          {exp.type}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-medium text-stone-700">{exp.company}</span>
-                      {exp.companyUrl && (
-                        <a
-                          href={exp.companyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-stone-400 hover:text-blue-600 transition-colors"
-                          title={`Visit ${exp.company}`}
-                        >
-                          <ExternalLink size={15} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col md:items-end text-sm text-gray-500 gap-1 mt-1 md:mt-0">
-                    <div className="flex items-center">
-                      <Calendar size={15} className="mr-1.5 text-gray-400" />
-                      <span className="font-medium text-gray-700">{exp.period}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <MapPin size={15} className="mr-1.5 text-gray-400" />
-                      <span>{exp.location}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <ul className="space-y-2.5 my-5">
-                  {exp.description.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="text-gray-600 flex items-start text-base leading-relaxed"
-                    >
-                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2.5 mr-3 flex-shrink-0"></span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {exp.technologies && (
-                  <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-600 rounded-md text-xs font-medium"
-                      >
-                        {tech}
+              <div key={index} className="relative">
+                <div className="py-10">
+                  {/* Period & Location Kicker */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-wrap items-center justify-between gap-2 mb-3"
+                  >
+                    <span className="font-mono text-xs text-stone-500 uppercase tracking-wider">
+                      {exp.period} · {exp.location}
+                    </span>
+                    {exp.type && (
+                      <span className="font-mono text-[11px] text-stone-400">
+                        {exp.type}
                       </span>
+                    )}
+                  </motion.div>
+
+                  {/* Role & Company */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-wrap items-baseline justify-between gap-2 mb-5"
+                  >
+                    <h3 className="font-serif-editorial text-2xl sm:text-3xl text-stone-950">
+                      {exp.title}
+                    </h3>
+                    {exp.companyUrl ? (
+                      <a
+                        href={exp.companyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-stone-800 hover:text-stone-950 transition-colors"
+                      >
+                        <span>— {exp.company}</span>
+                        <ArrowUpRight size={14} />
+                      </a>
+                    ) : (
+                      <span className="text-sm font-medium text-stone-700">
+                        — {exp.company}
+                      </span>
+                    )}
+                  </motion.div>
+
+                  {/* Highlights (Each Bullet Animates Individually) */}
+                  <ul className="space-y-2.5 mb-5">
+                    {exp.description.map((item, itemIndex) => (
+                      <motion.li
+                        key={itemIndex}
+                        initial={{ opacity: 0, x: 14 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: 0.1 + itemIndex * 0.07,
+                          ease: [0.16, 1, 0.3, 1]
+                        }}
+                        className="text-stone-600 text-sm sm:text-base leading-relaxed flex items-start gap-3"
+                      >
+                        <span className="text-stone-400 select-none">—</span>
+                        <span>{item}</span>
+                      </motion.li>
                     ))}
-                  </div>
-                )}
-              </motion.div>
+                  </ul>
+
+                  {/* Subtle Inline Stack (Each Tag Animates Individually) */}
+                  {exp.technologies && (
+                    <div className="flex flex-wrap gap-x-2 gap-y-1 pt-2">
+                      {exp.technologies.map((tech, tIdx) => (
+                        <motion.span
+                          key={tech}
+                          initial={{ opacity: 0, y: 8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, amount: 0.3 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.18 + tIdx * 0.04,
+                            ease: [0.16, 1, 0.3, 1]
+                          }}
+                          className="font-mono text-xs text-stone-400"
+                        >
+                          {tech}
+                          {tIdx < exp.technologies!.length - 1 && (
+                            <span className="ml-2 text-stone-300">/</span>
+                          )}
+                        </motion.span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+                  className="h-[1px] w-full bg-stone-300/75 origin-left"
+                />
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
