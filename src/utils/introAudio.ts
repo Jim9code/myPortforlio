@@ -1,16 +1,18 @@
 // Procedural Web Audio API sound engine for the Intro Preloader
-// Uses a persistent singleton AudioContext so React StrictMode double-mounts
-// never close or interrupt the audio pipeline on page refresh.
+// Uses a persistent singleton AudioContext + Master Compressor/Gain bus so sounds
+// are rich, punchy, and clearly audible on both mobile phones and laptop speakers.
 
 let sharedAudioCtx: AudioContext | null = null;
 let sharedNoiseBuffer: AudioBuffer | null = null;
+let sharedMasterBus: GainNode | null = null;
 
 function getOrCreateAudioContext(): {
   ctx: AudioContext | null;
   noiseBuffer: AudioBuffer | null;
+  masterBus: AudioNode | null;
 } {
   if (typeof window === 'undefined') {
-    return { ctx: null, noiseBuffer: null };
+    return { ctx: null, noiseBuffer: null, masterBus: null };
   }
 
   try {
@@ -18,10 +20,34 @@ function getOrCreateAudioContext(): {
       const AudioCtx =
         window.AudioContext ||
         (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!AudioCtx) return { ctx: null, noiseBuffer: null };
+      if (!AudioCtx) return { ctx: null, noiseBuffer: null, masterBus: null };
 
       sharedAudioCtx = new AudioCtx();
       sharedNoiseBuffer = null;
+      sharedMasterBus = null;
+    }
+
+    // Create a Master Boost + Dynamics Compressor bus so phone & laptop speakers
+    // project loud, clear transients without digital clipping
+    if (!sharedMasterBus && sharedAudioCtx) {
+      const preGain = sharedAudioCtx.createGain();
+      preGain.gain.value = 2.6;
+
+      if (sharedAudioCtx.createDynamicsCompressor) {
+        const compressor = sharedAudioCtx.createDynamicsCompressor();
+        compressor.threshold.value = -14;
+        compressor.knee.value = 10;
+        compressor.ratio.value = 3.5;
+        compressor.attack.value = 0.002;
+        compressor.release.value = 0.12;
+
+        preGain.connect(compressor);
+        compressor.connect(sharedAudioCtx.destination);
+      } else {
+        preGain.connect(sharedAudioCtx.destination);
+      }
+
+      sharedMasterBus = preGain;
     }
 
     if (!sharedNoiseBuffer && sharedAudioCtx) {
@@ -44,15 +70,20 @@ function getOrCreateAudioContext(): {
         b3 = 0.86650 * b3 + white * 0.3104856;
         b4 = 0.55000 * b4 + white * 0.5329522;
         b5 = -0.7616 * b5 - white * 0.0168980;
-        data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.05;
+        // Full-bodied pink/white blend normalized for strong speaker projection
+        data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.75) * 0.24;
         b6 = white * 0.115926;
       }
       sharedNoiseBuffer = buffer;
     }
 
-    return { ctx: sharedAudioCtx, noiseBuffer: sharedNoiseBuffer };
+    return {
+      ctx: sharedAudioCtx,
+      noiseBuffer: sharedNoiseBuffer,
+      masterBus: sharedMasterBus || sharedAudioCtx.destination
+    };
   } catch {
-    return { ctx: null, noiseBuffer: null };
+    return { ctx: null, noiseBuffer: null, masterBus: null };
   }
 }
 
@@ -69,7 +100,6 @@ class IntroSoundEngine {
     }
 
     try {
-      // Race resume() against a short 120ms timeout in case the browser blocks unprompted autoplay
       await Promise.race([
         ctx.resume(),
         new Promise((resolve) => setTimeout(resolve, 120))
@@ -87,53 +117,70 @@ class IntroSoundEngine {
   }
 
   /**
-   * Plays a warm, tactile analog thock + soft sub-pulse when each intro word appears.
+   * Plays a warm, punchy analog thock + mid-range harmonic transient when each intro word appears.
+   * Tuned specifically so small phone and laptop speakers reproduce it clearly.
    */
   public playWordReveal(wordIndex: number) {
-    const { ctx, noiseBuffer } = getOrCreateAudioContext();
-    if (!ctx || !noiseBuffer) return;
+    const { ctx, noiseBuffer, masterBus } = getOrCreateAudioContext();
+    if (!ctx || !noiseBuffer || !masterBus) return;
 
     const scheduleNodes = () => {
       const now = ctx.currentTime + 0.005;
 
-      // 1. Warm low-end cinematic thud
+      // 1. Punchy triangle body thud (rich in 180-320Hz harmonics so phone speakers project it)
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
-      const startFreq = wordIndex === 0 ? 120 : wordIndex === 1 ? 108 : 94;
+      const startFreq = wordIndex === 0 ? 220 : wordIndex === 1 ? 195 : 172;
 
-      osc.type = 'sine';
+      osc.type = 'triangle';
       osc.frequency.setValueAtTime(startFreq, now);
-      osc.frequency.exponentialRampToValueAtTime(34, now + 0.15);
+      osc.frequency.exponentialRampToValueAtTime(55, now + 0.16);
 
       oscGain.gain.setValueAtTime(0.001, now);
-      oscGain.gain.linearRampToValueAtTime(0.26, now + 0.012);
-      oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.17);
+      oscGain.gain.linearRampToValueAtTime(0.65, now + 0.008);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
 
       osc.connect(oscGain);
-      oscGain.connect(ctx.destination);
+      oscGain.connect(masterBus);
       osc.start(now);
-      osc.stop(now + 0.18);
+      osc.stop(now + 0.19);
 
-      // 2. Crisp matte-paper / mechanical key transient
+      // 2. Crisp mechanical / woody transient click (450Hz -> 130Hz)
+      const clickOsc = ctx.createOscillator();
+      const clickGain = ctx.createGain();
+      clickOsc.type = 'sine';
+      clickOsc.frequency.setValueAtTime(520 - wordIndex * 45, now);
+      clickOsc.frequency.exponentialRampToValueAtTime(120, now + 0.035);
+
+      clickGain.gain.setValueAtTime(0.001, now);
+      clickGain.gain.linearRampToValueAtTime(0.42, now + 0.003);
+      clickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+
+      clickOsc.connect(clickGain);
+      clickGain.connect(masterBus);
+      clickOsc.start(now);
+      clickOsc.stop(now + 0.045);
+
+      // 3. Textured matte-paper transient burst
       const noise = ctx.createBufferSource();
       noise.buffer = noiseBuffer;
 
       const filter = ctx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(1150 + wordIndex * 180, now);
-      filter.Q.setValueAtTime(1.8, now);
+      filter.frequency.setValueAtTime(1350 + wordIndex * 200, now);
+      filter.Q.setValueAtTime(1.2, now);
 
       const noiseGain = ctx.createGain();
       noiseGain.gain.setValueAtTime(0.001, now);
-      noiseGain.gain.linearRampToValueAtTime(0.22, now + 0.004);
-      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+      noiseGain.gain.linearRampToValueAtTime(0.58, now + 0.004);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.065);
 
       noise.connect(filter);
       filter.connect(noiseGain);
-      noiseGain.connect(ctx.destination);
+      noiseGain.connect(masterBus);
 
       noise.start(now, Math.random() * 0.5);
-      noise.stop(now + 0.055);
+      noise.stop(now + 0.07);
     };
 
     if (ctx.state === 'suspended') {
@@ -147,11 +194,11 @@ class IntroSoundEngine {
   }
 
   /**
-   * Plays a subtle, crisp matte-cardstock finger tap sound panned to the tapped column.
+   * Plays a crisp matte-cardstock finger tap sound panned to the tapped column.
    */
   public playTileTap(normalizedX = 0.5) {
-    const { ctx, noiseBuffer } = getOrCreateAudioContext();
-    if (!ctx || !noiseBuffer) return;
+    const { ctx, noiseBuffer, masterBus } = getOrCreateAudioContext();
+    if (!ctx || !noiseBuffer || !masterBus) return;
 
     const scheduleTap = () => {
       const now = ctx.currentTime + 0.002;
@@ -160,24 +207,24 @@ class IntroSoundEngine {
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(165, now);
-      osc.frequency.exponentialRampToValueAtTime(48, now + 0.045);
+      osc.frequency.setValueAtTime(260, now);
+      osc.frequency.exponentialRampToValueAtTime(68, now + 0.055);
 
       oscGain.gain.setValueAtTime(0.001, now);
-      oscGain.gain.linearRampToValueAtTime(0.18, now + 0.004);
-      oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+      oscGain.gain.linearRampToValueAtTime(0.55, now + 0.004);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
 
       const noise = ctx.createBufferSource();
       noise.buffer = noiseBuffer;
       const filter = ctx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(1600, now);
-      filter.Q.setValueAtTime(2.2, now);
+      filter.frequency.setValueAtTime(1750, now);
+      filter.Q.setValueAtTime(1.3, now);
 
       const noiseGain = ctx.createGain();
       noiseGain.gain.setValueAtTime(0.001, now);
-      noiseGain.gain.linearRampToValueAtTime(0.14, now + 0.003);
-      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.032);
+      noiseGain.gain.linearRampToValueAtTime(0.5, now + 0.003);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
 
       const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
       if (panner) {
@@ -187,19 +234,19 @@ class IntroSoundEngine {
         noise.connect(filter);
         filter.connect(noiseGain);
         noiseGain.connect(panner);
-        panner.connect(ctx.destination);
+        panner.connect(masterBus);
       } else {
         osc.connect(oscGain);
-        oscGain.connect(ctx.destination);
+        oscGain.connect(masterBus);
         noise.connect(filter);
         filter.connect(noiseGain);
-        noiseGain.connect(ctx.destination);
+        noiseGain.connect(masterBus);
       }
 
       osc.start(now);
-      osc.stop(now + 0.055);
+      osc.stop(now + 0.065);
       noise.start(now, Math.random() * 0.4);
-      noise.stop(now + 0.038);
+      noise.stop(now + 0.05);
     };
 
     if (ctx.state === 'suspended') {
@@ -221,19 +268,17 @@ class IntroSoundEngine {
     rows: number,
     tileEvents?: Array<{ delay: number; col: number }>
   ) {
-    const { ctx, noiseBuffer } = getOrCreateAudioContext();
-    if (!ctx || !noiseBuffer) return;
+    const { ctx, noiseBuffer, masterBus } = getOrCreateAudioContext();
+    if (!ctx || !noiseBuffer || !masterBus) return;
 
     const scheduleCascade = () => {
       const baseTime = ctx.currentTime + 0.005;
 
-      // Sample ~12-14 distinct audio bursts from the scattered tile events so the sound
-      // starts immediately at the tapped tile (delay 0) and scatters organically in stereo
       const bursts: Array<{ delay: number; pan: number; isOrigin?: boolean }> = [];
 
       if (tileEvents && tileEvents.length > 0) {
         const sorted = [...tileEvents].sort((a, b) => a.delay - b.delay);
-        const step = Math.max(1, Math.floor(sorted.length / 13));
+        const step = Math.max(1, Math.floor(sorted.length / 14));
         for (let i = 0; i < sorted.length; i += step) {
           const item = sorted[i];
           bursts.push({
@@ -256,23 +301,24 @@ class IntroSoundEngine {
       bursts.forEach(({ delay, pan, isOrigin }) => {
         const startTime = baseTime + delay;
 
-        // Part A: Paper Flick / Friction Swish ("ffft-shh" bandpass sweep)
+        // Part A: Rich Paper Flick / Friction Swish ("ffft-shh" wider bandpass sweep)
         const noise = ctx.createBufferSource();
         noise.buffer = noiseBuffer;
 
         const bandpass = ctx.createBiquadFilter();
         bandpass.type = 'bandpass';
-        const pitchVariance = 0.86 + Math.random() * 0.32;
-        bandpass.frequency.setValueAtTime(850 * pitchVariance, startTime);
-        bandpass.frequency.exponentialRampToValueAtTime(2600 * pitchVariance, startTime + 0.038);
-        bandpass.frequency.exponentialRampToValueAtTime(1100 * pitchVariance, startTime + 0.095);
-        bandpass.Q.setValueAtTime(2.4, startTime);
+        const pitchVariance = 0.88 + Math.random() * 0.3;
+        bandpass.frequency.setValueAtTime(780 * pitchVariance, startTime);
+        bandpass.frequency.exponentialRampToValueAtTime(2800 * pitchVariance, startTime + 0.042);
+        bandpass.frequency.exponentialRampToValueAtTime(1050 * pitchVariance, startTime + 0.11);
+        // Wider Q (1.35) lets much more mid-range paper body through on mobile speakers
+        bandpass.Q.setValueAtTime(1.35, startTime);
 
         const flickGain = ctx.createGain();
-        const peakVolume = isOrigin ? 0.25 : 0.14 + Math.random() * 0.1;
+        const peakVolume = isOrigin ? 0.78 : 0.48 + Math.random() * 0.22;
         flickGain.gain.setValueAtTime(0.0001, startTime);
-        flickGain.gain.linearRampToValueAtTime(peakVolume, startTime + 0.016);
-        flickGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.095);
+        flickGain.gain.linearRampToValueAtTime(peakVolume, startTime + 0.015);
+        flickGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.115);
 
         const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
 
@@ -282,36 +328,36 @@ class IntroSoundEngine {
         if (panner) {
           panner.pan.setValueAtTime(pan, startTime);
           flickGain.connect(panner);
-          panner.connect(ctx.destination);
+          panner.connect(masterBus);
         } else {
-          flickGain.connect(ctx.destination);
+          flickGain.connect(masterBus);
         }
 
         noise.start(startTime, Math.random() * 0.6);
-        noise.stop(startTime + 0.11);
+        noise.stop(startTime + 0.125);
 
-        // Part B: Soft Cardstock Settle Snap (+55ms after the flick begins)
-        const snapTime = startTime + 0.055;
+        // Part B: Tactile Cardstock Settle Snap (+50ms after the flick begins)
+        const snapTime = startTime + 0.05;
         const snapOsc = ctx.createOscillator();
         const snapGain = ctx.createGain();
 
         snapOsc.type = 'triangle';
-        snapOsc.frequency.setValueAtTime(190 * pitchVariance, snapTime);
-        snapOsc.frequency.exponentialRampToValueAtTime(58, snapTime + 0.028);
+        snapOsc.frequency.setValueAtTime(280 * pitchVariance, snapTime);
+        snapOsc.frequency.exponentialRampToValueAtTime(75, snapTime + 0.036);
 
         snapGain.gain.setValueAtTime(0.0001, snapTime);
-        snapGain.gain.linearRampToValueAtTime(0.075, snapTime + 0.003);
-        snapGain.gain.exponentialRampToValueAtTime(0.0001, snapTime + 0.03);
+        snapGain.gain.linearRampToValueAtTime(0.32, snapTime + 0.004);
+        snapGain.gain.exponentialRampToValueAtTime(0.0001, snapTime + 0.04);
 
         snapOsc.connect(snapGain);
         if (panner) {
           snapGain.connect(panner);
         } else {
-          snapGain.connect(ctx.destination);
+          snapGain.connect(masterBus);
         }
 
         snapOsc.start(snapTime);
-        snapOsc.stop(snapTime + 0.035);
+        snapOsc.stop(snapTime + 0.045);
       });
     };
 
